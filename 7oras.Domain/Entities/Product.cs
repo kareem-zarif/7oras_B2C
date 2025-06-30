@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using _7oras.Domain.Shared;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _7oras.Domain
 {
@@ -12,6 +13,9 @@ namespace _7oras.Domain
         public int NoINStock { get; set; }
         public int MinNumToFactoryOrder { get; set; }
         public IList<string> ProductPicsPathes { get; set; }
+        //extra details 
+        public int? WarrantyNMonths { get; set; }
+        public ShippingTypes Shipping { get; set; } = ShippingTypes.None;
         [ForeignKey("SubCategory")]
         public Guid SubCategoryId { get; set; }
         [ForeignKey("Supplier")]

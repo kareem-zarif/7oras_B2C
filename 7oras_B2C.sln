@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		FutureFeatures.txt = FutureFeatures.txt
 		Names.txt = Names.txt
 		PointsOfImprove.txt = PointsOfImprove.txt
-		TextFile1.txt = TextFile1.txt
+		Why-WhyNot.txt = Why-WhyNot.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{AC38E949-96E9-4D8B-B8AA-9A306489965C}"

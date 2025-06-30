@@ -1,0 +1,16 @@
+txt-1
+Soft Delete::
+	-Save Data in database
+	-Keep History of Deletation
+	-not performance expensive such as physical delete
+	-physical delete cause fragment in indexes , soft not cause this
+
+LanguageSelection:Arabic or ENg
+-ASP.NET Core localization features for translations
+-in Cookie
+	-Works for both authenticated and anonymous users
+	-Remembers the user's choice across sessions and browser restarts (until the cookie expires).
+
+Cart :: Cookie or Entity(database)
+-Entity => for authenticated users
+-Cookie => for anunmous Users (When he register transfer from cookie to Database Entity)

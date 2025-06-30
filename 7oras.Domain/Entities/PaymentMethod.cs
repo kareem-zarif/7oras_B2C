@@ -5,7 +5,7 @@ namespace _7oras.Domain
     public class PaymentMethod : BaseEnt
     {
         public PaymentMethodType PaymentType { get; set; }
-
+        public bool IsDefault { get; set; } = false;
         //INstapay
 
         //Visa
