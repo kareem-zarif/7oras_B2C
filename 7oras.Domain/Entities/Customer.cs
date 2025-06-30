@@ -1,6 +1,20 @@
-﻿namespace _7oras.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace _7oras.Domain
 {
-    public class Customer
+    public class Customer : Person
     {
+
+        [ForeignKey("Cart")]
+        public Guid CartId { get; set; }
+        //nav
+        public virtual Cart Cart { get; set; }
+        public virtual Wishlist Wishlist { get; set; }
+        public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
+        public virtual ICollection<PaymentMethod> PaymentMethods { get; set; } = new HashSet<PaymentMethod>();
+        public virtual ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
+        public virtual ICollection<Message> Messages { get; set; } = new HashSet<Message>();
+        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+        public virtual ICollection<Report> Reports { get; set; } = new HashSet<Report>();
     }
 }

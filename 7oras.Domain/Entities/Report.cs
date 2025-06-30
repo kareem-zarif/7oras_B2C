@@ -1,13 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace _7oras.Domain
+﻿namespace _7oras.Domain
 {
-    public class Message : BaseEnt
+    public class Report : BaseEnt
     {
-        public string Body { get; set; }
-        [ForeignKey("Customer")]
+        public string? Reason { get; set; }
         public Guid CustomerId { get; set; }
-        [ForeignKey("Supplier")]
         public Guid SupplierId { get; set; }
         //nav
         public virtual Customer Customer { get; set; }
