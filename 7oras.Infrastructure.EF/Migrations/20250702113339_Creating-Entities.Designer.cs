@@ -12,8 +12,8 @@ using _7oras.Infrastructure.EF.Data;
 namespace _7oras.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250702062156_CreateEntities")]
-    partial class CreateEntities
+    [Migration("20250702113339_Creating-Entities")]
+    partial class CreatingEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -282,7 +282,7 @@ namespace _7oras.Infrastructure.EF.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notification");
                 });
 
             modelBuilder.Entity("_7oras.Domain.Order", b =>
@@ -419,7 +419,7 @@ namespace _7oras.Infrastructure.EF.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderStatusHistories");
+                    b.ToTable("OrderStatusHistory");
                 });
 
             modelBuilder.Entity("_7oras.Domain.PaymentMethod", b =>

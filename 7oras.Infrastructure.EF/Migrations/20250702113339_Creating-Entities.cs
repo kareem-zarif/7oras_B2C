@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace _7oras.Infrastructure.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateEntities : Migration
+    public partial class CreatingEntities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -177,7 +178,7 @@ namespace _7oras.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Notifications",
+                name: "Notification",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -192,9 +193,9 @@ namespace _7oras.Infrastructure.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                    table.PrimaryKey("PK_Notification", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Notifications_Persons_CustomerId",
+                        name: "FK_Notification_Persons_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Persons",
                         principalColumn: "Id",
@@ -485,7 +486,7 @@ namespace _7oras.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderStatusHistories",
+                name: "OrderStatusHistory",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -500,9 +501,9 @@ namespace _7oras.Infrastructure.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderStatusHistories", x => x.Id);
+                    table.PrimaryKey("PK_OrderStatusHistory", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderStatusHistories_Orders_OrderId",
+                        name: "FK_OrderStatusHistory_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
@@ -546,8 +547,8 @@ namespace _7oras.Infrastructure.EF.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notifications_CustomerId",
-                table: "Notifications",
+                name: "IX_Notification_CustomerId",
+                table: "Notification",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
@@ -587,8 +588,8 @@ namespace _7oras.Infrastructure.EF.Migrations
                 column: "PaymentMethodId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderStatusHistories_OrderId",
-                table: "OrderStatusHistories",
+                name: "IX_OrderStatusHistory_OrderId",
+                table: "OrderStatusHistory",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
@@ -720,13 +721,13 @@ namespace _7oras.Infrastructure.EF.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "Notifications");
+                name: "Notification");
 
             migrationBuilder.DropTable(
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
-                name: "OrderStatusHistories");
+                name: "OrderStatusHistory");
 
             migrationBuilder.DropTable(
                 name: "ProductWishlist");

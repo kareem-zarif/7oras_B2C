@@ -1,3 +1,4 @@
+using _7oras.Infrastructure.EF.IOC;
 namespace _7oras.UI.MVC
 {
     public class Program

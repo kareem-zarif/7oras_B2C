@@ -13,7 +13,6 @@ namespace _7oras.Infrastructure.EF.EntitiesConfiguration
             builder.Property(x => x.IFactoryPicPath).IsRequired(false).HasMaxLength(100);
             builder.Property(x => x.BankAccountName).IsRequired(false).HasMaxLength(50);
             builder.Property(x => x.BankAccountNumber).IsRequired(false).HasMaxLength(50);
-            builder.HasQueryFilter(x => x.IsExist);
         }
     }
 }
