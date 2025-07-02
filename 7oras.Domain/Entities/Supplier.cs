@@ -9,7 +9,7 @@
         public string? BankAccountName { get; set; }
         public string? BankAccountNumber { get; set; }
         public bool IsBlocked { get; set; } = false;
-        public DateTime? BlockUntil { get; set; }
+        public DateTime? BlockUntil { get; set; } //nullable value type and not need write it isrequied(false) in fluent api
         //nav
         public virtual ICollection<Product> Suppliers { get; set; } = new HashSet<Product>();
         public virtual ICollection<Address> Addresses { get; set; } = new HashSet<Address>();

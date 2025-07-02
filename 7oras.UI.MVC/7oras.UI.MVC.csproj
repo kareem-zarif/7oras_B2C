@@ -7,4 +7,15 @@
     <RootNamespace>_7oras.UI.MVC</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\7oras.Infrastructure.EF\7oras.Infrastructure.EF.csproj" />
+  </ItemGroup>
+
 </Project>

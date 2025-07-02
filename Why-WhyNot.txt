@@ -14,3 +14,8 @@ LanguageSelection:Arabic or ENg
 Cart :: Cookie or Entity(database)
 -Entity => for authenticated users
 -Cookie => for anunmous Users (When he register transfer from cookie to Database Entity)
+
+may cause cycles or multiple cascade Problem 
+-Ondelete is defaulty Cascade
+-this problem happen if deleting the entity cause more than one delete cascade
+-change all Delete for nav properties to Restrict ot NoAction except only one allowd to be cascade ot SetNull

@@ -5,7 +5,7 @@ namespace _7oras.Domain
     public class SubCategory : BaseEnt
     {
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
         //nav 

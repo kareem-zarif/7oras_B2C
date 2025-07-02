@@ -6,6 +6,7 @@ namespace _7oras.Domain
     {
         public int Quantity { get; set; }
         public double UnitPrice { get; set; } //price at time of purchase
+        public bool IsSample { get; set; }
         [ForeignKey("Product")]
         public Guid ProductId { get; set; }
         [ForeignKey("Order")]

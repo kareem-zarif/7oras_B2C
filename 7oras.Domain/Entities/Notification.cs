@@ -3,7 +3,7 @@
     public class Notification : BaseEnt
     {
         public string Message { get; set; }
-        public bool IsRead { get; set; }
+        public bool IsRead { get; set; } = false;
         //nav 
         public virtual Customer Customer { get; set; }
     }
