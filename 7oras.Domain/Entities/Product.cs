@@ -19,14 +19,13 @@ namespace _7oras.Domain
         public ShippingTypes Shipping { get; set; } = ShippingTypes.None;
         [ForeignKey("SubCategory")]
         public Guid SubCategoryId { get; set; }
-        [ForeignKey("Supplier")]
-        public Guid SupplierId { get; set; }
+
         //nav
         public virtual SubCategory SubCategory { get; set; }
-        public virtual Supplier Supplier { get; set; }
-        public virtual CartItem CartItem { get; set; }
+        public virtual ICollection<Supplier> Suppliers { get; set; } = new HashSet<Supplier>();
+        public virtual ICollection<CartItem> CartItems { get; set; } = new HashSet<CartItem>();
         public virtual ICollection<Wishlist> Wishlists { get; set; } = new HashSet<Wishlist>();
-        public virtual OrderItem OrderItem { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; } = new HashSet<OrderItem>();
         public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
 
     }

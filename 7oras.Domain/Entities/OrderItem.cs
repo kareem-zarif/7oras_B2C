@@ -10,10 +10,10 @@ namespace _7oras.Domain
         [ForeignKey("Product")]
         public Guid ProductId { get; set; }
         [ForeignKey("Order")]
-        public Guid OrderId { get; set; }
+        public Guid? OrderId { get; set; }
         //nav
         public virtual Product Product { get; set; }
-        public virtual Order Order { get; set; }
+        public virtual Order? Order { get; set; }
 
     }
 }

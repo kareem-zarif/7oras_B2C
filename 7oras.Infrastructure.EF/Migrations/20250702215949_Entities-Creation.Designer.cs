@@ -12,8 +12,8 @@ using _7oras.Infrastructure.EF.Data;
 namespace _7oras.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250702113339_Creating-Entities")]
-    partial class CreatingEntities
+    [Migration("20250702215949_Entities-Creation")]
+    partial class EntitiesCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,36 @@ namespace _7oras.Infrastructure.EF.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CustomerNotification", b =>
+                {
+                    b.Property<Guid>("CustomersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("NotificationsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CustomersId", "NotificationsId");
+
+                    b.HasIndex("NotificationsId");
+
+                    b.ToTable("CustomerNotification");
+                });
+
+            modelBuilder.Entity("ProductSupplier", b =>
+                {
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SuppliersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProductsId", "SuppliersId");
+
+                    b.HasIndex("SuppliersId");
+
+                    b.ToTable("ProductSupplier");
+                });
 
             modelBuilder.Entity("ProductWishlist", b =>
                 {
@@ -163,8 +193,7 @@ namespace _7oras.Infrastructure.EF.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ProductId1")
-                        .IsUnique();
+                    b.HasIndex("ProductId1");
 
                     b.ToTable("CartItems");
                 });
@@ -258,9 +287,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
@@ -280,9 +306,7 @@ namespace _7oras.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Notification");
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("_7oras.Domain.Order", b =>
@@ -358,7 +382,7 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductId")
@@ -379,8 +403,7 @@ namespace _7oras.Infrastructure.EF.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ProductId1")
-                        .IsUnique();
+                    b.HasIndex("ProductId1");
 
                     b.ToTable("OrderItems");
                 });
@@ -419,7 +442,7 @@ namespace _7oras.Infrastructure.EF.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderStatusHistory");
+                    b.ToTable("OrderStatusHistories");
                 });
 
             modelBuilder.Entity("_7oras.Domain.PaymentMethod", b =>
@@ -591,12 +614,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<Guid?>("SubCategoryId1")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("SupplierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("SupplierId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("WarrantyNMonths")
                         .HasColumnType("int");
 
@@ -605,10 +622,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.HasIndex("SubCategoryId1");
-
-                    b.HasIndex("SupplierId");
-
-                    b.HasIndex("SupplierId1");
 
                     b.ToTable("Products");
                 });
@@ -686,7 +699,7 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("PrdouctId")
+                    b.Property<Guid>("PrdoductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductId")
@@ -822,6 +835,36 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.HasDiscriminator().HasValue("Supplier");
                 });
 
+            modelBuilder.Entity("CustomerNotification", b =>
+                {
+                    b.HasOne("_7oras.Domain.Customer", null)
+                        .WithMany()
+                        .HasForeignKey("CustomersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("_7oras.Domain.Notification", null)
+                        .WithMany()
+                        .HasForeignKey("NotificationsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProductSupplier", b =>
+                {
+                    b.HasOne("_7oras.Domain.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("_7oras.Domain.Supplier", null)
+                        .WithMany()
+                        .HasForeignKey("SuppliersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProductWishlist", b =>
                 {
                     b.HasOne("_7oras.Domain.Product", null)
@@ -874,8 +917,8 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .IsRequired();
 
                     b.HasOne("_7oras.Domain.Product", null)
-                        .WithOne("CartItem")
-                        .HasForeignKey("_7oras.Domain.CartItem", "ProductId1")
+                        .WithMany("CartItems")
+                        .HasForeignKey("ProductId1")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -899,17 +942,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Supplier");
-                });
-
-            modelBuilder.Entity("_7oras.Domain.Notification", b =>
-                {
-                    b.HasOne("_7oras.Domain.Customer", "Customer")
-                        .WithMany("Notifications")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("_7oras.Domain.Order", b =>
@@ -941,9 +973,7 @@ namespace _7oras.Infrastructure.EF.Migrations
                 {
                     b.HasOne("_7oras.Domain.Order", "Order")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("_7oras.Domain.Product", "Product")
                         .WithMany()
@@ -952,8 +982,8 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .IsRequired();
 
                     b.HasOne("_7oras.Domain.Product", null)
-                        .WithOne("OrderItem")
-                        .HasForeignKey("_7oras.Domain.OrderItem", "ProductId1")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("ProductId1")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -996,19 +1026,7 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .WithMany("Products")
                         .HasForeignKey("SubCategoryId1");
 
-                    b.HasOne("_7oras.Domain.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("_7oras.Domain.Supplier", null)
-                        .WithMany("Suppliers")
-                        .HasForeignKey("SupplierId1");
-
                     b.Navigation("SubCategory");
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("_7oras.Domain.Report", b =>
@@ -1113,11 +1131,9 @@ namespace _7oras.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("_7oras.Domain.Product", b =>
                 {
-                    b.Navigation("CartItem")
-                        .IsRequired();
+                    b.Navigation("CartItems");
 
-                    b.Navigation("OrderItem")
-                        .IsRequired();
+                    b.Navigation("OrderItems");
 
                     b.Navigation("Reviews");
                 });
@@ -1130,8 +1146,6 @@ namespace _7oras.Infrastructure.EF.Migrations
             modelBuilder.Entity("_7oras.Domain.Customer", b =>
                 {
                     b.Navigation("Messages");
-
-                    b.Navigation("Notifications");
 
                     b.Navigation("Orders");
 
@@ -1148,8 +1162,6 @@ namespace _7oras.Infrastructure.EF.Migrations
             modelBuilder.Entity("_7oras.Domain.Supplier", b =>
                 {
                     b.Navigation("Messages");
-
-                    b.Navigation("Suppliers");
                 });
 #pragma warning restore 612, 618
         }

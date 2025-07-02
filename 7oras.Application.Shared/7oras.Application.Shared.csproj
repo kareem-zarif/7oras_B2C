@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\Response\" />
+    <Folder Include="Dtos\Request\" />
+    <Folder Include="ISevices\" />
+  </ItemGroup>
+
 </Project>

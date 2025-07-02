@@ -1,1 +1,3 @@
 App/, API/, UI/, Infra/, Core/ 
+
+Address/ , Cart/ , CartItem/ , Category/ , Customer/ , Message/ , Notification/ , Order/ , OrderItem/ , OrderStatusHistory , PaymentMethod/ , Person/ , Product/ , Report/ , Review/ , SubCategory/ , Supplier/ , Wishlist/

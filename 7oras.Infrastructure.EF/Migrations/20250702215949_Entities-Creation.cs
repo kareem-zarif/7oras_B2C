@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace _7oras.Infrastructure.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class CreatingEntities : Migration
+    public partial class EntitiesCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,6 +27,24 @@ namespace _7oras.Infrastructure.EF.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsExist = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,6 +70,46 @@ namespace _7oras.Infrastructure.EF.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    PricePerPiece = table.Column<double>(type: "float", nullable: false),
+                    PricePer50Piece = table.Column<double>(type: "float", nullable: true),
+                    PricePer100Piece = table.Column<double>(type: "float", nullable: true),
+                    NoINStock = table.Column<int>(type: "int", nullable: false),
+                    MinNumToFactoryOrder = table.Column<int>(type: "int", nullable: false),
+                    ApprovalStatus = table.Column<byte>(type: "tinyint", nullable: false),
+                    ProductPicsPathes = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    WarrantyNMonths = table.Column<int>(type: "int", nullable: true),
+                    Shipping = table.Column<byte>(type: "tinyint", nullable: false),
+                    SubCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SubCategoryId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsExist = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_SubCategories_SubCategoryId",
+                        column: x => x.SubCategoryId,
+                        principalTable: "SubCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Products_SubCategories_SubCategoryId1",
+                        column: x => x.SubCategoryId1,
+                        principalTable: "SubCategories",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -94,6 +152,18 @@ namespace _7oras.Infrastructure.EF.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CartItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Products_ProductId1",
+                        column: x => x.ProductId1,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -147,6 +217,30 @@ namespace _7oras.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CustomerNotification",
+                columns: table => new
+                {
+                    CustomersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NotificationsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerNotification", x => new { x.CustomersId, x.NotificationsId });
+                    table.ForeignKey(
+                        name: "FK_CustomerNotification_Notifications_NotificationsId",
+                        column: x => x.NotificationsId,
+                        principalTable: "Notifications",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CustomerNotification_Persons_CustomersId",
+                        column: x => x.CustomersId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Messages",
                 columns: table => new
                 {
@@ -175,31 +269,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Notification",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    IsRead = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsExist = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notification", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Notification_Persons_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Persons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -234,56 +303,27 @@ namespace _7oras.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "ProductSupplier",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    PricePerPiece = table.Column<double>(type: "float", nullable: false),
-                    PricePer50Piece = table.Column<double>(type: "float", nullable: true),
-                    PricePer100Piece = table.Column<double>(type: "float", nullable: true),
-                    NoINStock = table.Column<int>(type: "int", nullable: false),
-                    MinNumToFactoryOrder = table.Column<int>(type: "int", nullable: false),
-                    ApprovalStatus = table.Column<byte>(type: "tinyint", nullable: false),
-                    ProductPicsPathes = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    WarrantyNMonths = table.Column<int>(type: "int", nullable: true),
-                    Shipping = table.Column<byte>(type: "tinyint", nullable: false),
-                    SubCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SubCategoryId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SupplierId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsExist = table.Column<bool>(type: "bit", nullable: false)
+                    ProductsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SuppliersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_ProductSupplier", x => new { x.ProductsId, x.SuppliersId });
                     table.ForeignKey(
-                        name: "FK_Products_Persons_SupplierId",
-                        column: x => x.SupplierId,
+                        name: "FK_ProductSupplier_Persons_SuppliersId",
+                        column: x => x.SuppliersId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Persons_SupplierId1",
-                        column: x => x.SupplierId1,
-                        principalTable: "Persons",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Products_SubCategories_SubCategoryId",
-                        column: x => x.SubCategoryId,
-                        principalTable: "SubCategories",
+                        name: "FK_ProductSupplier_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Products_SubCategories_SubCategoryId1",
-                        column: x => x.SubCategoryId1,
-                        principalTable: "SubCategories",
-                        principalColumn: "Id");
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -321,6 +361,39 @@ namespace _7oras.Infrastructure.EF.Migrations
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PrdoductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsExist = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Persons_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -389,39 +462,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reviews",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Rating = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PrdouctId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsExist = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reviews", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reviews_Persons_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Persons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reviews_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProductWishlist",
                 columns: table => new
                 {
@@ -454,7 +494,7 @@ namespace _7oras.Infrastructure.EF.Migrations
                     UnitPrice = table.Column<double>(type: "float", nullable: false),
                     IsSample = table.Column<bool>(type: "bit", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ProductId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -469,8 +509,7 @@ namespace _7oras.Infrastructure.EF.Migrations
                         name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_OrderItems_Products_ProductId",
                         column: x => x.ProductId,
@@ -486,7 +525,7 @@ namespace _7oras.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderStatusHistory",
+                name: "OrderStatusHistories",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -501,9 +540,9 @@ namespace _7oras.Infrastructure.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderStatusHistory", x => x.Id);
+                    table.PrimaryKey("PK_OrderStatusHistories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderStatusHistory_Orders_OrderId",
+                        name: "FK_OrderStatusHistories_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
@@ -528,13 +567,17 @@ namespace _7oras.Infrastructure.EF.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CartItems_ProductId1",
                 table: "CartItems",
-                column: "ProductId1",
-                unique: true);
+                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_CustomerId",
                 table: "Carts",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomerNotification_NotificationsId",
+                table: "CustomerNotification",
+                column: "NotificationsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_CustomerId",
@@ -545,11 +588,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                 name: "IX_Messages_SupplierId",
                 table: "Messages",
                 column: "SupplierId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Notification_CustomerId",
-                table: "Notification",
-                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
@@ -564,8 +602,7 @@ namespace _7oras.Infrastructure.EF.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_ProductId1",
                 table: "OrderItems",
-                column: "ProductId1",
-                unique: true);
+                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
@@ -588,8 +625,8 @@ namespace _7oras.Infrastructure.EF.Migrations
                 column: "PaymentMethodId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderStatusHistory_OrderId",
-                table: "OrderStatusHistory",
+                name: "IX_OrderStatusHistories_OrderId",
+                table: "OrderStatusHistories",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
@@ -613,14 +650,9 @@ namespace _7oras.Infrastructure.EF.Migrations
                 column: "SubCategoryId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_SupplierId",
-                table: "Products",
-                column: "SupplierId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_SupplierId1",
-                table: "Products",
-                column: "SupplierId1");
+                name: "IX_ProductSupplier_SuppliersId",
+                table: "ProductSupplier",
+                column: "SuppliersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductWishlist_WishlistsId",
@@ -680,22 +712,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_CartItems_Products_ProductId",
-                table: "CartItems",
-                column: "ProductId",
-                principalTable: "Products",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CartItems_Products_ProductId1",
-                table: "CartItems",
-                column: "ProductId1",
-                principalTable: "Products",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_Carts_Persons_CustomerId",
                 table: "Carts",
                 column: "CustomerId",
@@ -718,16 +734,19 @@ namespace _7oras.Infrastructure.EF.Migrations
                 name: "CartItems");
 
             migrationBuilder.DropTable(
-                name: "Messages");
+                name: "CustomerNotification");
 
             migrationBuilder.DropTable(
-                name: "Notification");
+                name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
-                name: "OrderStatusHistory");
+                name: "OrderStatusHistories");
+
+            migrationBuilder.DropTable(
+                name: "ProductSupplier");
 
             migrationBuilder.DropTable(
                 name: "ProductWishlist");
@@ -737,6 +756,9 @@ namespace _7oras.Infrastructure.EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "Orders");

@@ -1,5 +1,6 @@
 ﻿using _7oras.Domain.Shared;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _7oras.Domain
 {
@@ -20,7 +21,7 @@ namespace _7oras.Domain
         public string? PhoneNumber { get; set; }
         //fawry
         public string? FawryCode { get; set; }
-
+        [ForeignKey("Customer")]
         public Guid CustomerId { get; set; }
         //nav
         public virtual Customer Customer { get; set; }

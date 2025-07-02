@@ -5,6 +5,6 @@
         public string Message { get; set; }
         public bool IsRead { get; set; } = false;
         //nav 
-        public virtual Customer Customer { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; } = new HashSet<Customer>();
     }
 }

@@ -19,6 +19,7 @@ namespace _7oras.Infrastructure.EF.IOC
             });
 
             services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));//resolve and inject all repo automatically when create dbcontext
+            services.AddScoped<IUOW, UOW>();
 
             return services;
         }

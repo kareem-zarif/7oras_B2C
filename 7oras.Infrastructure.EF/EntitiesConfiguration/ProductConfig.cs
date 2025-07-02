@@ -14,20 +14,17 @@ namespace _7oras.Infrastructure.EF.EntitiesConfiguration
             builder.Property(x => x.Description).IsRequired().HasMaxLength(500);
             builder.Property(x => x.ProductPicsPathes).IsRequired().HasMaxLength(100);
             builder.HasQueryFilter(x => x.IsExist); //default show only Exsiting(hide soft Deleted)
-            builder.HasQueryFilter(x => x.IsExist);
 
-            builder.HasOne(x => x.CartItem)
+            builder.HasMany(x => x.CartItems)
                 .WithOne()
                 .OnDelete(DeleteBehavior.Restrict);
+
             builder.HasOne(x => x.SubCategory)
                  .WithMany()
                  .HasForeignKey(x => x.SubCategoryId)
                  .OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(x => x.Supplier)
-                .WithMany()
-                .HasForeignKey(x => x.SupplierId)
-                .OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(x => x.OrderItem)
+
+            builder.HasMany(x => x.OrderItems)
                 .WithOne()
                 .OnDelete(DeleteBehavior.Restrict);
         }
