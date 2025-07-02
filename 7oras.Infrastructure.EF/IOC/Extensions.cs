@@ -1,4 +1,6 @@
-﻿using _7oras.Infrastructure.EF.Data;
+﻿using _7oras.Domain.Interfaces;
+using _7oras.Infrastructure.EF.Data;
+using _7oras.Infrastructure.EF.Repos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +18,7 @@ namespace _7oras.Infrastructure.EF.IOC
                 opt.UseSqlServer(connString);
             });
 
-            //add scoped //repo ,UOW
+            services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));//resolve and inject all repo automatically when create dbcontext
 
             return services;
         }
