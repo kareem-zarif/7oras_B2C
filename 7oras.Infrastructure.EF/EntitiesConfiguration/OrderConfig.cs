@@ -10,25 +10,17 @@ namespace _7oras.Infrastructure.EF.EntitiesConfiguration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.HasQueryFilter(x => x.IsExist);
 
-            builder.HasData(
-                new Order
-                {
-                    Id = Guid.NewGuid(),
-                    OrderDate = DateTime.UtcNow,
-                    TotalAmount = 100.0,
-                    PaymentMethodId = Guid.NewGuid(), 
-                    CustomerId = Guid.NewGuid() 
-                },
-                new Order
-                {
-                    Id = Guid.NewGuid(),
-                    OrderDate = DateTime.UtcNow,
-                    TotalAmount = 200.0,
-                    PaymentMethodId = Guid.NewGuid(),
-                    CustomerId = Guid.NewGuid() 
-                }
-            );
+            builder.HasOne(x => x.Customer)
+                .WithMany()
+                .HasForeignKey(x => x.CustomerId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.HasOne(x => x.PaymentMethod)
+                .WithMany()
+                .HasForeignKey(x => x.PaymentMethodId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

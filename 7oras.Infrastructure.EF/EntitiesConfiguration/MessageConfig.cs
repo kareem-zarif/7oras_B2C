@@ -4,30 +4,28 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace _7oras.Infrastructure.EF.EntitiesConfiguration
 {
-     public class MessageConfig : IEntityTypeConfiguration<Message>
-     {
+    public class MessageConfig : IEntityTypeConfiguration<Message>
+    {
         public void Configure(EntityTypeBuilder<Message> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Body).HasMaxLength(500).IsRequired(false);
+            builder.Property(x => x.Body).HasMaxLength(100).IsRequired();
+            builder.HasQueryFilter(x => x.IsExist);
 
-            builder.HasData(
-                new Message
-                {
-                    Id = Guid.NewGuid(),
-                    Body = "Hello, this is a test message.",
-                    CustomerId = Guid.NewGuid(),
-                    SupplierId = Guid.NewGuid()  
-                },
-                new Message
-                {
-                    Id = Guid.NewGuid(),
-                    Body = "Another test message for validation.",
-                    CustomerId = Guid.NewGuid(), 
-                    SupplierId = Guid.NewGuid()  
-                }
-            );
+            builder.HasOne(x => x.Customer)
+                .WithMany(x => x.Messages)
+                .HasForeignKey(x => x.CustomerId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.HasOne(x => x.Supplier)
+                .WithMany(x => x.Messages)
+                .HasForeignKey(x => x.SupplierId)
+                .OnDelete(DeleteBehavior.Restrict);
+            //Cascade:: Customer delete cause all related messages
+            //Restrict :: can not delete Customer till delete message(depency) 
+            //NoAction :: Same Restrict => for manual delete logic
+            //SetNull :: for save history of messages even after deletong Customer
         }
     }
 }

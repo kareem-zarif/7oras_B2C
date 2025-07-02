@@ -12,23 +12,7 @@ namespace _7oras.Infrastructure.EF.EntitiesConfiguration
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Description).IsRequired(false).HasMaxLength(500);
-
-            builder.HasData(
-                new SubCategory
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Electronics",
-                    Description = "Devices and gadgets",
-                    CategoryId = Guid.NewGuid() 
-                },
-                new SubCategory
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Books",
-                    Description = "Various genres of books",
-                    CategoryId = Guid.NewGuid() 
-                }
-            );
+            builder.HasQueryFilter(x => x.IsExist);
         }
     }
 }

@@ -10,19 +10,7 @@ namespace _7oras.Infrastructure.EF.EntitiesConfiguration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-
-            builder.HasData(
-                new Wishlist
-                {
-                    Id = Guid.NewGuid(),
-                    CustomerId = Guid.NewGuid()
-                },
-                new Wishlist
-                {
-                    Id = Guid.NewGuid(),
-                    CustomerId = Guid.Parse("")
-                }
-            );
+            builder.HasQueryFilter(x => x.IsExist);
         }
     }
 }

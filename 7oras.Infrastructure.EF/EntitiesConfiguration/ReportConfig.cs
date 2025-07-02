@@ -11,23 +11,17 @@ namespace _7oras.Infrastructure.EF.EntitiesConfiguration
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Reason).IsRequired(false).HasMaxLength(500);
+            builder.HasQueryFilter(x => x.IsExist);
 
-            builder.HasData(
-                new Report
-                {
-                    Id = Guid.NewGuid(),
-                    Reason = "Sample report reason",
-                    CustomerId = Guid.NewGuid(),
-                    SupplierId = Guid.NewGuid()
-                },
-                new Report
-                {
-                    Id = Guid.NewGuid(),
-                    Reason = "Another sample report reason",
-                    CustomerId = Guid.NewGuid(),
-                    SupplierId = Guid.NewGuid()
-                }
-            );
+            builder.HasOne(x => x.Customer)
+                .WithMany()
+               .HasForeignKey(x => x.CustomerId)
+               .OnDelete(DeleteBehavior.SetNull);
+
+            builder.HasOne(x => x.Supplier)
+                .WithMany()
+                .HasForeignKey(x => x.SupplierId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

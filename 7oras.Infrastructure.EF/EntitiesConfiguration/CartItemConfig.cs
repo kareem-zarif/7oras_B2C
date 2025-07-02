@@ -1,4 +1,8 @@
-﻿namespace _7oras.Infrastructure.EF.EntitiesConfiguration
+﻿using _7oras.Domain;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace _7oras.Infrastructure.EF.EntitiesConfiguration
 {
     public class CartItemConfig : IEntityTypeConfiguration<CartItem>
     {
@@ -6,24 +10,8 @@
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Quantity).IsRequired(true);
+            builder.HasQueryFilter(x => x.IsExist);
 
-            builder.HasData(
-                new CartItem
-                {
-                    Id = Guid.NewGuid(),
-                    Quantity = 2,
-                    ProductId = Guid.NewGuid(),
-                    CartId = Guid.NewGuid()
-                },
-                new CartItem
-                {
-                    Id = Guid.NewGuid(),
-                    Quantity = 3,
-                    ProductId = Guid.NewGuid(),
-                    CartId = Guid.NewGuid()
-                }
-            );
         }
     }
 }

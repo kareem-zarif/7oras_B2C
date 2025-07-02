@@ -14,7 +14,6 @@ namespace _7oras.Domain
         public virtual PaymentMethod PaymentMethod { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new HashSet<OrderItem>();
-        public virtual ICollection<OrderItem> OrderItems { get; set; } = new HashSet<OrderItem>();
         public virtual ICollection<OrderStatusHistory> StatusHistories { get; set; } = new HashSet<OrderStatusHistory>();
     }
 }

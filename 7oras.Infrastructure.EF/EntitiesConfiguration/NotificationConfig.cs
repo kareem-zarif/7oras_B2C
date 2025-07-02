@@ -1,5 +1,6 @@
 ﻿using _7oras.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace _7oras.Infrastructure.EF.EntitiesConfiguration
 {

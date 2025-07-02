@@ -10,27 +10,9 @@ namespace _7oras.Infrastructure.EF.EntitiesConfiguration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Rating).IsRequired();
             builder.Property(x => x.Comment).IsRequired(false).HasMaxLength(500);
+            builder.HasQueryFilter(x => x.IsExist);
 
-            builder.HasData(
-                new Review
-                {
-                    Id = Guid.NewGuid(),
-                    Rating = 5,
-                    Comment = "Excellent product!",
-                    CustomerId = Guid.NewGuid(),
-                    PrdouctId = Guid.NewGuid()
-                },
-                new Review
-                {
-                    Id = Guid.NewGuid(),
-                    Rating = 3,
-                    Comment = "Average quality.",
-                    CustomerId = Guid.NewGuid(),
-                    PrdouctId = Guid.NewGuid()
-                }
-            );
         }
     }
 }
