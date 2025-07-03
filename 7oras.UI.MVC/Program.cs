@@ -3,7 +3,7 @@ using _7oras.Infrastructure.EF.IOC;
 namespace _7oras.UI.MVC
 {
     public class Program
-    {
+    {//welcome githib
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
