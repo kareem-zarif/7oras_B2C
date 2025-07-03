@@ -1,18 +1,12 @@
-﻿using _7oras.Domain;
-using _7oras.Domain.Interfaces;
-using _7oras.Infrastructure.EF.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-
-namespace _7oras.Infrastructure.EF.Repos
+﻿namespace _7oras.Infrastructure.EF.Repos
 {
     public class BaseRepo<TEntity> : IBaseRepo<TEntity> where TEntity : BaseEnt
     {
         #region readonly
         //using readonly so that in multi threads , no thread change the instance of connection (so all classes inheits from BaseRepo will use same _dbContext,_dbset )
         #endregion
-        private readonly AppDbContext _dbContext; //represent connection instance
-        private readonly DbSet<TEntity> _dbset; //reprsent database table in memory
+        protected readonly AppDbContext _dbContext; //represent connection instance
+        protected readonly DbSet<TEntity> _dbset; //reprsent database table in memory
 
         public virtual async Task<TEntity> GetAsync(Guid id)
         {
@@ -38,7 +32,11 @@ namespace _7oras.Infrastructure.EF.Repos
 
             return found;
         }
+        #region FilterMehtod vs Expression<func<>>
+        //for repeated filters : ex orderedByName  :: Make method in repo sothat if wanna change logic will change only the repo
 
+        //for notRepeated filters  : use Expression<func<>>
+        #endregion
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
             if (predicate == null)
@@ -73,6 +71,53 @@ namespace _7oras.Infrastructure.EF.Repos
             _dbset.Remove(found);
 
             return found;
+        }
+
+        #region Eager Loading (Include)
+        //IncludeNavProperties will be override by childRepo and make include => so any method use IncludeNavProperties in BaseRepo will return Entity included with its nav properrties
+        #endregion
+        protected virtual IQueryable<TEntity> IncludeNavProperties(DbSet<TEntity> NavProperty)
+        {
+            return NavProperty;
+        }
+        public virtual async Task<TEntity> GetAsyncInclude(Guid id)
+        {
+            var found = await IncludeNavProperties(_dbset).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+
+            if (found == null)
+                throw new Exception($"Not Found Entity with id : {id}");
+
+            return found;
+        }
+
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsyncInclude(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            if (predicate == null)
+                return await IncludeNavProperties(_dbset).AsNoTracking().ToListAsync();
+
+            return await IncludeNavProperties(_dbset).AsNoTracking().Where(predicate).ToListAsync();
+
+        }
+
+        public virtual async Task<TEntity> CreateAsyncInclude(TEntity entity)
+        {
+            var created = await CreateAsync(entity);
+
+            return await GetAsyncInclude(created.Id);
+        }
+
+        public virtual async Task<TEntity> UpdateAsyncInclude(TEntity entity)
+        {
+            var updated = await UpdateAsync(entity);
+
+            return await GetAsyncInclude(updated.Id);
+        }
+
+        public virtual async Task<TEntity> DeleteAsyncInclude(Guid id)
+        {
+            var deleted = await DeleteAsync(id);
+
+            return await DeleteAsync(deleted.Id);
         }
     }
 }

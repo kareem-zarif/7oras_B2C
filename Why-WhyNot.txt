@@ -24,3 +24,5 @@ Filteration often in database not in memory
 -Performance :get only the needed data in response over the network
 -Scalability: Databases are optimized for filtering, sorting, and paging large datasets than memory
 -Security : avoid fetching sensitive data
+
+//hossam

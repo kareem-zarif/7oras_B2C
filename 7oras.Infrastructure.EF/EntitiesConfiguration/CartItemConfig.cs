@@ -1,8 +1,4 @@
-﻿using _7oras.Domain;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace _7oras.Infrastructure.EF.EntitiesConfiguration
+﻿namespace _7oras.Infrastructure.EF.EntitiesConfiguration
 {
     public class CartItemConfig : IEntityTypeConfiguration<CartItem>
     {

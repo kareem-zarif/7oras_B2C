@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace _7oras.Domain
+﻿namespace _7oras.Domain
 {
     public class OrderItem : BaseEnt
     {

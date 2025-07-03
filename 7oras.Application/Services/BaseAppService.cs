@@ -1,7 +1,4 @@
-﻿using _7oras.Application.Shared.ISevices;
-using _7oras.Domain.Interfaces;
-
-namespace _7oras.Application.Services
+﻿namespace _7oras.Application.Services
 {
     public abstract class BaseAppService<TEntity, TAppCreateDto, TAppUpdateDto, TAppResDto>
         : IBaseAppService<TAppCreateDto, TAppUpdateDto, TAppResDto>
@@ -74,5 +71,60 @@ namespace _7oras.Application.Services
                 return _mapper.Map<TAppResDto>(deleted);
             else throw new Exception("error occured when saving changes in DB");
         }
+
+        //Eager Loading
+        public async Task<TAppResDto> GetAsyncInclude(Guid id)
+        {
+            var found = await _baseRepo.GetAsyncInclude(id);
+            var mapped = _mapper.Map<TAppResDto>(found);
+            return mapped;
+        }
+
+        public async Task<IList<TAppResDto>> GetAllAsyncInclude()
+        {
+            var foundList = await _baseRepo.GetAllAsyncInclude();
+            var mappedList = _mapper.Map<IList<TAppResDto>>(foundList);
+            return mappedList;
+        }
+
+        public async Task<TAppResDto> CreateAsyncInclude(TAppCreateDto dto)
+        {
+            var entity = _mapper.Map<TEntity>(dto);
+            var created = await _baseRepo.CreateAsyncInclude(entity);
+            int saved = await _uow.Complete();
+            if (saved > 0)
+            {
+                var mapped = _mapper.Map<TAppResDto>(created);
+                return mapped;
+            }
+            else throw new Exception("error occured when saving changes in DB");
+        }
+
+        public async Task<TAppResDto> UpdateAsyncInclude(TAppUpdateDto dto)
+        {
+            var entity = _mapper.Map<TEntity>(dto);
+            var updated = _baseRepo.UpdateAsyncInclude(entity);
+            int saved = await _uow.Complete();
+            if (saved > 0)
+            {
+                var mapped = _mapper.Map<TAppResDto>(updated);
+                return mapped;
+            }
+            else throw new Exception("error occured when saving changes in DB");
+        }
+
+        public async Task<TAppResDto> DeleteAsyncInclude(Guid id)
+        {
+            var deleted = await _baseRepo.DeleteAsyncInclude(id);
+            int saved = await _uow.Complete();
+            if (saved > 0)
+            {
+                var mapped = _mapper.Map<TAppResDto>(deleted);
+                return mapped;
+            }
+            else throw new Exception("error occured when saving changes in DB");
+        }
+
+
     }
 }

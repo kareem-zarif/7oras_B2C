@@ -10,6 +10,7 @@ namespace _7oras.UI.MVC
 
             // Add services to the container.
             //>>layers configs
+            //>>layers configs
             builder.Services.ConfigAppAutoMapper();
             builder.Services.ConfigAppServices();
             builder.Services.ConfigEF(builder.Configuration);

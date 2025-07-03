@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace _7oras.Domain
+﻿namespace _7oras.Domain
 {
     public abstract class Person : BaseEnt
     {

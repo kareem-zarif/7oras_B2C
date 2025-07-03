@@ -1,8 +1,4 @@
-﻿using _7oras.Domain;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-
-namespace _7oras.Infrastructure.EF.Data
+﻿namespace _7oras.Infrastructure.EF.Data
 {
     public class AppDbContext : DbContext
     {

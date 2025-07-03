@@ -1,8 +1,4 @@
-﻿using _7oras.Domain;
-using _7oras.Domain.Interfaces;
-using _7oras.Infrastructure.EF.Data;
-
-namespace _7oras.Infrastructure.EF
+﻿namespace _7oras.Infrastructure.EF
 {
     public class UOW : IUOW
     {

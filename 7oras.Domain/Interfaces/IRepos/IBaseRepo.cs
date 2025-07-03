@@ -14,6 +14,14 @@
         Task<TEntity> UpdateAsync(TEntity entity);
         Task<TEntity> DeleteAsync(Guid id);
 
+
+        //Eager Loading
+        Task<TEntity> GetAsyncInclude(Guid id);
+        Task<IEnumerable<TEntity>> GetAllAsyncInclude(Expression<Func<TEntity, bool>> predicate = null);
+        Task<TEntity> CreateAsyncInclude(TEntity entity);
+        Task<TEntity> UpdateAsyncInclude(TEntity entity);
+        Task<TEntity> DeleteAsyncInclude(Guid id);
+
         //+ any heavily Used  Method ex:GetBestSellerProduct =>so that logic in one place 
     }
 }

@@ -10,5 +10,12 @@
         Task<TAppResDto> CreateAsync(TAppCreateDto dto);
         Task<TAppResDto> UpdateAsync(TAppUpdateDto dto);
         Task<TAppResDto> DeleteAsync(Guid id);
+
+        //Eager loading
+        Task<TAppResDto> GetAsyncInclude(Guid id);
+        Task<IList<TAppResDto>> GetAllAsyncInclude();
+        Task<TAppResDto> CreateAsyncInclude(TAppCreateDto dto);
+        Task<TAppResDto> UpdateAsyncInclude(TAppUpdateDto dto);
+        Task<TAppResDto> DeleteAsyncInclude(Guid id);
     }
 }

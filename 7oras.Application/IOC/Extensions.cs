@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿
 
 namespace _7oras.Application.IOC
 {
@@ -13,7 +13,7 @@ namespace _7oras.Application.IOC
 
         public static IServiceCollection ConfigAppServices(this IServiceCollection services)
         {
-            // services.AddScoped<ICategoryService,CategoryService>
+            services.AddScoped<ICategoryAppService, CategoryAppServic>();
 
             return services;
         }

@@ -1,11 +1,4 @@
-﻿using _7oras.Domain.Interfaces;
-using _7oras.Infrastructure.EF.Data;
-using _7oras.Infrastructure.EF.Repos;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace _7oras.Infrastructure.EF.IOC
+﻿namespace _7oras.Infrastructure.EF.IOC
 {
     public static class Extensions
     {

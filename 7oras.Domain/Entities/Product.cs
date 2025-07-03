@@ -1,7 +1,4 @@
-﻿using _7oras.Domain.Shared;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace _7oras.Domain
+﻿namespace _7oras.Domain
 {
     public class Product : BaseEnt
     {
