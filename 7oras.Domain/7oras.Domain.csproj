@@ -11,4 +11,8 @@
     <ProjectReference Include="..\7oras.Domain.Shared\7oras.Domain.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\IIuntegration\" />
+  </ItemGroup>
+
 </Project>

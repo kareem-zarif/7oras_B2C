@@ -1,11 +1,14 @@
 ﻿using _7oras.Domain.Shared;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _7oras.Domain
 {
     public class PaymentMethod : BaseEnt
     {
+        //if orderitem is sample will allow to him cash m if order not allow cash
         public PaymentMethodType PaymentType { get; set; }
-
+        public bool IsDefault { get; set; } = false;
         //INstapay
 
         //Visa
@@ -14,10 +17,11 @@ namespace _7oras.Domain
         public string? ExpireDate { get; set; }
         public string? CVV { get; set; }
         //vodafoneCash , OrangeCash
+        [Required, Phone, MinLength(11), MaxLength(13), RegularExpression(@"^(010|011|012|15)\d{8,10}$", ErrorMessage = "Phone number must start with 010, 011,015, or 012 and be between 11 and 13 digits")]
         public string? PhoneNumber { get; set; }
         //fawry
         public string? FawryCode { get; set; }
-
+        [ForeignKey("Customer")]
         public Guid CustomerId { get; set; }
         //nav
         public virtual Customer Customer { get; set; }

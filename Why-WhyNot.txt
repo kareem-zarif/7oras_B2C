@@ -1,0 +1,26 @@
+txt-1
+Soft Delete::
+	-Save Data in database
+	-Keep History of Deletation
+	-not performance expensive such as physical delete
+	-physical delete cause fragment in indexes , soft not cause this
+
+LanguageSelection:Arabic or ENg
+-ASP.NET Core localization features for translations
+-in Cookie
+	-Works for both authenticated and anonymous users
+	-Remembers the user's choice across sessions and browser restarts (until the cookie expires).
+
+Cart :: Cookie or Entity(database)
+-Entity => for authenticated users
+-Cookie => for anunmous Users (When he register transfer from cookie to Database Entity)
+
+may cause cycles or multiple cascade Problem 
+-Ondelete is defaulty Cascade
+-this problem happen if deleting the entity cause more than one delete cascade
+-change all Delete for nav properties to Restrict ot NoAction except only one allowd to be cascade ot SetNull
+
+Filteration often in database not in memory
+-Performance :get only the needed data in response over the network
+-Scalability: Databases are optimized for filtering, sorting, and paging large datasets than memory
+-Security : avoid fetching sensitive data

@@ -1,1 +1,6 @@
 App/, API/, UI/, Infra/, Core/ 
+
+Address/, Cart/, CartItem/, Category/, Customer/, Message/, Notification/, Order/, OrderItem/, OrderStatusHistory/, PaymentMethod/, Person/, Product/, Report/, Review/, SubCategory/, Supplier/, Wishlist/
+
+Dtos Naming::
+Entity-Layer-Type-Dto ex: CategoryAppCreateDto.cs  CategoryAppUpdateDto.cs  CategoryAppResDto.cs

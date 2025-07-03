@@ -6,9 +6,9 @@ namespace _7oras.Domain
     {
         public string Body { get; set; }
         [ForeignKey("Customer")]
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
         [ForeignKey("Supplier")]
-        public Guid SupplierId { get; set; }
+        public Guid? SupplierId { get; set; }
         //nav
         public virtual Customer Customer { get; set; }
         public virtual Supplier Supplier { get; set; }
