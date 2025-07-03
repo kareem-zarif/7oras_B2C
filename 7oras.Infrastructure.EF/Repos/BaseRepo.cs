@@ -14,7 +14,7 @@ namespace _7oras.Infrastructure.EF.Repos
         private readonly AppDbContext _dbContext; //represent connection instance
         private readonly DbSet<TEntity> _dbset; //reprsent database table in memory
 
-        public async Task<TEntity> GetAsync(Guid id)
+        public virtual async Task<TEntity> GetAsync(Guid id)
         {
             #region FindAsync(),Tracking().FirstOrDefaultAsync
             // AsNoTracking().FirstOrDefaultAsync => for read-only // better peformance.
@@ -29,7 +29,7 @@ namespace _7oras.Infrastructure.EF.Repos
             return found;
         }
 
-        public async Task<TEntity> FindAsync(Guid id)
+        public virtual async Task<TEntity> FindAsync(Guid id)
         {
             var found = await _dbset.FindAsync(id);
 
@@ -39,7 +39,7 @@ namespace _7oras.Infrastructure.EF.Repos
             return found;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null)
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
             if (predicate == null)
                 return await _dbset.AsNoTracking().ToListAsync();
@@ -48,13 +48,13 @@ namespace _7oras.Infrastructure.EF.Repos
         }
 
 
-        public async Task<TEntity> CreateAsync(TEntity entity)
+        public virtual async Task<TEntity> CreateAsync(TEntity entity)
         {
             var created = await _dbset.AddAsync(entity);
             return created.Entity;
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
             var old = await FindAsync(entity.Id);
 
@@ -67,7 +67,7 @@ namespace _7oras.Infrastructure.EF.Repos
             return entity;
         }
 
-        public async Task<TEntity> DeleteAsync(Guid id)
+        public virtual async Task<TEntity> DeleteAsync(Guid id)
         {
             var found = await FindAsync(id);
             _dbset.Remove(found);

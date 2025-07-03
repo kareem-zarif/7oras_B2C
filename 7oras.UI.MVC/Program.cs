@@ -1,3 +1,4 @@
+using _7oras.Application.IOC;
 using _7oras.Infrastructure.EF.IOC;
 namespace _7oras.UI.MVC
 {
@@ -9,6 +10,8 @@ namespace _7oras.UI.MVC
 
             // Add services to the container.
             //>>layers configs
+            builder.Services.ConfigAppAutoMapper();
+            builder.Services.ConfigAppServices();
             builder.Services.ConfigEF(builder.Configuration);
 
             builder.Services.AddControllersWithViews();

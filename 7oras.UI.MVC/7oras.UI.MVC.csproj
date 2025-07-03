@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\7oras.Application\7oras.Application.csproj" />
     <ProjectReference Include="..\7oras.Infrastructure.EF\7oras.Infrastructure.EF.csproj" />
   </ItemGroup>
 

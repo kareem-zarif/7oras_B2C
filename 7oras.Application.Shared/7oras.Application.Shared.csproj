@@ -8,9 +8,40 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\Response\" />
-    <Folder Include="Dtos\Request\" />
-    <Folder Include="ISevices\" />
+    <Folder Include="Dtos\Request\Address\" />
+    <Folder Include="Dtos\Request\CartItem\" />
+    <Folder Include="Dtos\Request\Cart\" />
+    <Folder Include="Dtos\Request\Customer\" />
+    <Folder Include="Dtos\Request\Message\" />
+    <Folder Include="Dtos\Request\Notification\" />
+    <Folder Include="Dtos\Request\OrderItem\" />
+    <Folder Include="Dtos\Request\OrderStatusHistory\" />
+    <Folder Include="Dtos\Request\Order\" />
+    <Folder Include="Dtos\Request\PaymentMethod\" />
+    <Folder Include="Dtos\Request\Person\" />
+    <Folder Include="Dtos\Request\Product\" />
+    <Folder Include="Dtos\Request\Report\" />
+    <Folder Include="Dtos\Request\Review\" />
+    <Folder Include="Dtos\Request\SubCategory\" />
+    <Folder Include="Dtos\Request\Supplier\" />
+    <Folder Include="Dtos\Request\Wishlist\" />
+    <Folder Include="Dtos\Response\Address\" />
+    <Folder Include="Dtos\Response\CartItem\" />
+    <Folder Include="Dtos\Response\Cart\" />
+    <Folder Include="Dtos\Response\Customer\" />
+    <Folder Include="Dtos\Response\Message\" />
+    <Folder Include="Dtos\Response\Notification\" />
+    <Folder Include="Dtos\Response\OrderItem\" />
+    <Folder Include="Dtos\Response\OrderStatusHistory\" />
+    <Folder Include="Dtos\Response\Order\" />
+    <Folder Include="Dtos\Response\PaymentMethod\" />
+    <Folder Include="Dtos\Response\Person\" />
+    <Folder Include="Dtos\Response\Product\" />
+    <Folder Include="Dtos\Response\Report\" />
+    <Folder Include="Dtos\Response\Review\" />
+    <Folder Include="Dtos\Response\SubCategory\" />
+    <Folder Include="Dtos\Response\Supplier\" />
+    <Folder Include="Dtos\Response\Wishlist\" />
   </ItemGroup>
 
 </Project>

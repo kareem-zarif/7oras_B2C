@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace _7oras.Domain.Interfaces
+﻿namespace _7oras.Domain.Interfaces
 {
     public interface IBaseRepo<TEntity> where TEntity : BaseEnt
     {

@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="AutoMapper" Version="15.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="15.0.0" />
+    <ProjectReference Include="..\7oras.Application.Shared\7oras.Application.Shared.csproj" />
+    <ProjectReference Include="..\7oras.Domain\7oras.Domain.csproj" />
   </ItemGroup>
 
 </Project>
