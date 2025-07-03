@@ -3,7 +3,7 @@
 namespace _7oras.Domain
 {
     public class Customer : Person
-    {/
+    {
         [ForeignKey("Cart")]
         public Guid CartId { get; set; }
         //nav
