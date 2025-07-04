@@ -1,4 +1,4 @@
-﻿namespace _7oras.Application.Services
+﻿namespace _7oras.Application.Validators
 {
     public abstract class BaseAppService<TEntity, TAppCreateDto, TAppUpdateDto, TAppResDto>
         : IBaseAppService<TAppCreateDto, TAppUpdateDto, TAppResDto>
@@ -9,6 +9,8 @@
     {
         protected readonly IUOW _uow;
         protected readonly IMapper _mapper;
+        protected readonly IValidator<TAppCreateDto> _createValidator;
+        protected readonly IValidator<TAppUpdateDto> _updateValidator;
         #region Why abstract IBaseRepo Property 
         //-abstract to foerce any devired class to tell me which repo
         //can not inject both _unitOfWork and _baseRepo as i will have 2 instances of repo (one by UOW and other by BaseRepo) 
@@ -17,11 +19,19 @@
 
         #endregion
         protected abstract IBaseRepo<TEntity> _baseRepo { get; }
-        protected BaseAppService(IUOW uow, IMapper mapper)
+        protected BaseAppService(
+            IUOW uow,
+            IMapper mapper,
+            IValidator<TAppCreateDto> validator
+,
+            IValidator<TAppUpdateDto> updateValidator)
         {
             _uow = uow;
             _mapper = mapper;
+            _createValidator = validator;
+            _updateValidator = updateValidator;
         }
+
 
         public virtual async Task<TAppResDto> GetAsync(Guid id)
         {
@@ -39,6 +49,11 @@
 
         public virtual async Task<TAppResDto> CreateAsync(TAppCreateDto dto)
         {
+            var dtoValidation = await _createValidator.ValidateAsync(dto);
+            if (!dtoValidation.IsValid)
+                throw new ValidationException(dtoValidation.Errors);
+
+
             var entity = _mapper.Map<TEntity>(dto);
             var created = await _baseRepo.CreateAsync(entity);
             int saved = await _uow.Complete();
@@ -52,6 +67,10 @@
 
         public virtual async Task<TAppResDto> UpdateAsync(TAppUpdateDto dto)
         {
+            var dtoValidation = await _updateValidator.ValidateAsync(dto);
+            if (!dtoValidation.IsValid)
+                throw new ValidationException(dtoValidation.Errors);
+
             var entity = _mapper.Map<TEntity>(dto);
             var updated = await _baseRepo.UpdateAsync(entity);
             int saved = await _uow.Complete();
@@ -89,6 +108,10 @@
 
         public async Task<TAppResDto> CreateAsyncInclude(TAppCreateDto dto)
         {
+            var dtoValidation = await _createValidator.ValidateAsync(dto);
+            if (!dtoValidation.IsValid)
+                throw new ValidationException(dtoValidation.Errors);
+
             var entity = _mapper.Map<TEntity>(dto);
             var created = await _baseRepo.CreateAsyncInclude(entity);
             int saved = await _uow.Complete();
@@ -102,6 +125,10 @@
 
         public async Task<TAppResDto> UpdateAsyncInclude(TAppUpdateDto dto)
         {
+            var dtoValidation = await _updateValidator.ValidateAsync(dto);
+            if (!dtoValidation.IsValid)
+                throw new ValidationException(dtoValidation.Errors);
+
             var entity = _mapper.Map<TEntity>(dto);
             var updated = await _baseRepo.UpdateAsyncInclude(entity);
             int saved = await _uow.Complete();

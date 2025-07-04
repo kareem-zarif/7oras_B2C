@@ -9,5 +9,7 @@ namespace _7oras.UI.MVC.ViewModels.Request.SubCategory
         public string Name { get; set; }
         [MaxLength(500)]
         public string? Description { get; set; }
+        //nav
+        public Guid CategoryId { get; set; }
     }
 }

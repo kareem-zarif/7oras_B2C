@@ -19,7 +19,7 @@
         private IBaseRepo<Product> _productRepo;
         private IBaseRepo<Report> _reportRepo;
         private IBaseRepo<Review> _reviewRepo;
-        private IBaseRepo<SubCategory> _subCategoryRepo;
+        private ISubCategoryRepo _subCategoryRepo;
         private IBaseRepo<Supplier> _supplierRepo;
         private IBaseRepo<Wishlist> _wishlistRepo;
         public UOW( //using addScoped => auto pass the IRepos for the constructor for every instance of dbcontext
@@ -39,7 +39,7 @@
             IBaseRepo<Product> productRepo,
             IBaseRepo<Report> reportRepo,
             IBaseRepo<Review> reviewRepo,
-            IBaseRepo<SubCategory> subCategoryRepo,
+            ISubCategoryRepo subCategoryRepo,
             IBaseRepo<Supplier> supplierRepo,
             IBaseRepo<Wishlist> wishlistRepo)
         {
@@ -80,7 +80,7 @@
         public IBaseRepo<Product> ProductRepo => _productRepo;
         public IBaseRepo<Report> ReportRepo => _reportRepo;
         public IBaseRepo<Review> ReviewRepo => _reviewRepo;
-        public IBaseRepo<SubCategory> SubCategoryRepo => _subCategoryRepo;
+        public ISubCategoryRepo SubCategoryRepo => _subCategoryRepo;
         public IBaseRepo<Supplier> SupplierRepo => _supplierRepo;
         public IBaseRepo<Wishlist> WishlistRepo => _wishlistRepo;
 

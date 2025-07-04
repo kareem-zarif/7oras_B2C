@@ -30,4 +30,8 @@ Dtos
 -Has Server Side Validation
 -Response Dto , Not has Any  Validation or DataNotations
 
-//hossam
+Why App Dtos Data Notation not work 
+-MVC Layer Make Client Validation using =>ModelState.IsValid
+-API => By Exception Handling 
+-Infra => By Database Validation (SQL Validation)
+--App Layer =>FluentValidation Libaray As Its DataNotation Will Not Work

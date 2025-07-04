@@ -1,6 +1,4 @@
-﻿
-
-namespace _7oras.Application.IOC
+﻿namespace _7oras.Application.IOC
 {
     public static class Extensions
     {
@@ -11,9 +9,20 @@ namespace _7oras.Application.IOC
             return services;
         }
 
+        public static IServiceCollection ConfigAppFluentValidation(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<CategoryAppCreateDtoValidator>();
+
+            // This will register ALL validators in the assembly containing CategoryAppCreateDtoValidator
+
+            services.AddValidatorsFromAssemblyContaining<CategoryAppCreateDtoValidator>();
+            services.AddValidatorsFromAssemblyContaining<CategoryAppUpdateDtoValidator>();
+            return services;
+        }
         public static IServiceCollection ConfigAppServices(this IServiceCollection services)
         {
             services.AddScoped<ICategoryAppService, CategoryAppServic>();
+            services.AddScoped<ISubCategoryAppService, SubCategoryAppService>();
 
             return services;
         }

@@ -13,6 +13,7 @@
 
             services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));//resolve and inject all repo automatically when create dbcontext
             services.AddScoped<ICategoryRepo, CategoryRepo>();
+            services.AddScoped<ISubCategoryRepo, SubCategoryRepo>();
 
             services.AddScoped<IUOW, UOW>();
             return services;

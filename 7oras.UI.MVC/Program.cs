@@ -1,16 +1,16 @@
 namespace _7oras.UI.MVC
 {
     public class Program
-    {//welcome githib
+    {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
             //>>layers configs
-            //>>layers configs
             builder.Services.ConfigMVC();
             builder.Services.ConfigAppAutoMapper();
+            builder.Services.ConfigAppFluentValidation();
             builder.Services.ConfigAppServices();
             builder.Services.ConfigEF(builder.Configuration);
 

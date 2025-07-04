@@ -11,7 +11,7 @@
         Task<TAppResDto> UpdateAsync(TAppUpdateDto dto);
         Task<TAppResDto> DeleteAsync(Guid id);
 
-        //Eager loading
+        //Eager loading(include)
         Task<TAppResDto> GetAsyncInclude(Guid id);
         Task<IList<TAppResDto>> GetAllAsyncInclude();
         Task<TAppResDto> CreateAsyncInclude(TAppCreateDto dto);

@@ -106,15 +106,26 @@
         // POST: CategoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
             try
             {
+                var deleted = await _categoryService.DeleteAsyncInclude(id);
+
+                if (deleted == null)
+                    return NotFound();
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, ex.Message);
+                var found = await _categoryService.GetAsyncInclude(id);
+                if (found == null)
+                    return NotFound();
+                var mapped = _mapper.Map<CategoryResVM>(found);
+
+                return View(mapped);
             }
         }
     }

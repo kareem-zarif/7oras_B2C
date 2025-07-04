@@ -26,7 +26,7 @@ namespace _7oras.Domain.Interfaces
         IBaseRepo<Product> ProductRepo { get; }
         IBaseRepo<Report> ReportRepo { get; }
         IBaseRepo<Review> ReviewRepo { get; }
-        IBaseRepo<SubCategory> SubCategoryRepo { get; }
+        ISubCategoryRepo SubCategoryRepo { get; }
         IBaseRepo<Supplier> SupplierRepo { get; }
         IBaseRepo<Wishlist> WishlistRepo { get; }
 
