@@ -2,6 +2,7 @@
 
 namespace _7oras.UI.MVC.ViewModels
 {
+    //For Json Response
     public class BaseMVCResponse<TResVM> where TResVM : class
     {
         public ResponseStatusEnum Result { get; set; }

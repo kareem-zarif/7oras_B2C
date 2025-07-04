@@ -13,3 +13,10 @@ public class UOW : IUOW
     public IProductRepo ProductRepo { get; }
     // ...
 }
+
+-Exceptop handling in BaseApp Service  
+catch (Exception ex)
+{
+    // Optionally log here
+    throw new Exception("AppService failed to save changes.", ex); // to keep the details (ex) of current exception and send it to controller
+}

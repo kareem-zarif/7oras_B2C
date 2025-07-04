@@ -9,13 +9,9 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Description)
-            </th>
-            <th></th>
+            <th>Name</th>
+            <th>Descrption</th>
+            <th>Subcategory</th>
         </tr>
     </thead>
     <tbody>
@@ -23,12 +19,18 @@
         {
             foreach (var item in Model)
             {
+                 List<string> SubCatsName=new();
                 <tr>
                     <td>@item.Name</td>
-                    <td>@item.Description</td>
+                    <td>@item?.Description</td>
+                    @foreach (var subCat in @item?.SubCategories)
+                    {
+                        SubCatsName.Add(subCat.Name);
+                    }
+                    <td>@string.Join("|", SubCatsName)</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Name" class="btn btn-sm btn-primary">Edit</a>
-                        <a asp-action="Details" asp-route-id="@item.Description" class="btn btn-sm btn-info">Details</a>
+                        <a asp-action="Edit" asp-route-id="@item?.Id" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item?.Id" class="btn btn-sm btn-info">Details</a>
                     </td>
                 </tr>
             }

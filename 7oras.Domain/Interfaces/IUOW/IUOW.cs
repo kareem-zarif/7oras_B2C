@@ -1,4 +1,6 @@
-﻿namespace _7oras.Domain.Interfaces
+﻿using _7oras.Domain.Interfaces.IRepos;
+
+namespace _7oras.Domain.Interfaces
 {
     #region benefits of UOW
     //-Reduces database round trips (all changes happen in memory and commited once to database)
@@ -12,7 +14,7 @@
         IBaseRepo<Address> AddressRepo { get; }
         IBaseRepo<Cart> CartRepo { get; }
         IBaseRepo<CartItem> CartItemRepo { get; }
-        IBaseRepo<Category> CategoryRepo { get; }
+        ICategoryRepo CategoryRepo { get; }
         IBaseRepo<Customer> CustomerRepo { get; }
         IBaseRepo<Message> MessageRepo { get; }
         IBaseRepo<Notification> NotificationRepo { get; }

@@ -22,7 +22,6 @@
     <Folder Include="Dtos\Request\Product\" />
     <Folder Include="Dtos\Request\Report\" />
     <Folder Include="Dtos\Request\Review\" />
-    <Folder Include="Dtos\Request\SubCategory\" />
     <Folder Include="Dtos\Request\Supplier\" />
     <Folder Include="Dtos\Request\Wishlist\" />
     <Folder Include="Dtos\Response\Address\" />
@@ -39,7 +38,6 @@
     <Folder Include="Dtos\Response\Product\" />
     <Folder Include="Dtos\Response\Report\" />
     <Folder Include="Dtos\Response\Review\" />
-    <Folder Include="Dtos\Response\SubCategory\" />
     <Folder Include="Dtos\Response\Supplier\" />
     <Folder Include="Dtos\Response\Wishlist\" />
   </ItemGroup>
@@ -56,6 +54,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\7oras.Domain\7oras.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -43,7 +43,6 @@
     <Folder Include="ViewModels\Request\Product\" />
     <Folder Include="ViewModels\Request\Report\" />
     <Folder Include="ViewModels\Request\Review\" />
-    <Folder Include="ViewModels\Request\SubCategory\" />
     <Folder Include="ViewModels\Request\Supplier\" />
     <Folder Include="ViewModels\Request\Wishlist\" />
     <Folder Include="ViewModels\Response\Address\" />
@@ -60,7 +59,6 @@
     <Folder Include="ViewModels\Response\Product\" />
     <Folder Include="ViewModels\Response\Report\" />
     <Folder Include="ViewModels\Response\Review\" />
-    <Folder Include="ViewModels\Response\SubCategory\" />
     <Folder Include="ViewModels\Response\Supplier\" />
     <Folder Include="ViewModels\Response\Wishlist\" />
   </ItemGroup>

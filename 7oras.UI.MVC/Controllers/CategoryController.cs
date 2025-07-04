@@ -1,9 +1,4 @@
-﻿using _7oras.Application.Shared.ISevices;
-using _7oras.Domain.Shared;
-using _7oras.UI.MVC.ViewModels;
-using _7oras.UI.MVC.ViewModels.Response.Category;
-
-namespace _7oras.UI.MVC.Controllers
+﻿namespace _7oras.UI.MVC.Controllers
 {
     public class CategoryController : Controller
     {
@@ -18,38 +13,27 @@ namespace _7oras.UI.MVC.Controllers
         // GET: CategoryController
         public async Task<ActionResult> Index()
         {
-            var response = new BaseMVCResponse<CategoryResVM>();
-            try
-            {
-                var allCategories = await _categoryService.GetAllAsync();
-                var mapped = _mapper.Map<IList<CategoryResVM>>(allCategories);
+            var foundList = await _categoryService.GetAllAsyncInclude();
+            if (foundList == null)
+                return NotFound();
+            var mapped = _mapper.Map<IList<CategoryResVM>>(foundList);
 
-                response.Result = ResponseStatusEnum.succeed;
-                return View(mapped);
-            }
-            catch (Exception ex)
-            {
-                response.Result = ResponseStatusEnum.faild;
-                BaseErrorResponse error = new()
-                {
-                    FriendlyMessage = $"error when getting all Cargeories"
-                };
-                error.TechMessage.Add(ex?.Message ?? "");
-                response.ErrorDetails = error;
-
-            }
-
-            return View(response);
+            return View(mapped);
         }
 
         // GET: CategoryController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(Guid id)
         {
-            return View();
+            var found = await _categoryService.GetAsyncInclude(id);
+            if (found == null)
+                return NotFound();
+
+            var mapped = _mapper.Map<CategoryResVM>(found);
+            return View(mapped);
         }
 
         // GET: CategoryController/Create
-        public ActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
@@ -57,43 +41,66 @@ namespace _7oras.UI.MVC.Controllers
         // POST: CategoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(CategoryCreateVM model)
         {
-            try
+            if (ModelState.IsValid)
             {
+                var mappedGo = _mapper.Map<CategoryAppCreateDto>(model);
+                var created = await _categoryService.CreateAsync(mappedGo);
+                var mappedCome = _mapper.Map<CategoryResVM>(created);
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
+
+            else
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Failed Creating Cateory");
+                return View(model);
             }
         }
 
         // GET: CategoryController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            return View();
+            var found = await _categoryService.GetAsyncInclude(id);
+            if (found == null)
+                return NotFound();
+
+            var mapped_update = _mapper.Map<CategoryUpdateVM>(found);
+
+            return View(mapped_update);
         }
 
         // POST: CategoryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(CategoryUpdateVM model)
         {
-            try
+
+            if (ModelState.IsValid)
             {
+                var mappedGo = _mapper.Map<CategoryAppUpdateDto>(model);
+                var updated = await _categoryService.UpdateAsyncInclude(mappedGo);
+                var mappedCome = _mapper.Map<CategoryResVM>(updated);
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                return View();
+                ModelState.AddModelError(string.Empty, $"Failed Update {model.Name}");
+                return View(model);
             }
         }
 
         // GET: CategoryController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(Guid id)
         {
-            return View();
+            var found = await _categoryService.GetAsyncInclude(id);
+            if (found == null)
+                return NotFound();
+
+            var mapped = _mapper.Map<CategoryResVM>(found);
+            return View(mapped);
         }
 
         // POST: CategoryController/Delete/5

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using _7oras.UI.MVC.ViewModels.Response.SubCategory;
+using System.ComponentModel.DataAnnotations;
 
 namespace _7oras.UI.MVC.ViewModels.Request.Category
 {
@@ -10,5 +11,6 @@ namespace _7oras.UI.MVC.ViewModels.Request.Category
         public string Name { get; set; }
         [MaxLength(1000)]
         public string? Description { get; set; }
+        public IList<SubCategoryResVM> SubCategories { get; set; } = new List<SubCategoryResVM>();
     }
 }

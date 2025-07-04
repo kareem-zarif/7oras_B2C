@@ -103,7 +103,7 @@
         public async Task<TAppResDto> UpdateAsyncInclude(TAppUpdateDto dto)
         {
             var entity = _mapper.Map<TEntity>(dto);
-            var updated = _baseRepo.UpdateAsyncInclude(entity);
+            var updated = await _baseRepo.UpdateAsyncInclude(entity);
             int saved = await _uow.Complete();
             if (saved > 0)
             {

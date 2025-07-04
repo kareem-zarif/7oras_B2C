@@ -1,0 +1,25 @@
+﻿@using _7oras.Domain.Shared
+@model CategoryResVM
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+
+    <h2>@Model.Name</h2>
+    <p>@Model?.Description</p>
+
+    <h4>Subcategories</h4>
+    @if (Model?.SubCategories != null && Model.SubCategories.Any())
+    {
+        <ul>
+            @foreach (var sub in Model.SubCategories)
+            {
+                <li>
+                    <h3>@sub.Name </h3>
+                    <p>@sub?.Description</p>
+                </li>
+            }
+        </ul>
+}
+

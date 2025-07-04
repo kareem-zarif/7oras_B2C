@@ -7,7 +7,7 @@
         private IBaseRepo<Address> _addressRepo;
         private IBaseRepo<Cart> _cartRepo;
         private IBaseRepo<CartItem> _cartItemRepo;
-        private IBaseRepo<Category> _categoryRepo;
+        private ICategoryRepo _categoryRepo;
         private IBaseRepo<Customer> _customerRepo;
         private IBaseRepo<Message> _messageRepo;
         private IBaseRepo<Notification> _notificationRepo;
@@ -27,7 +27,7 @@
             IBaseRepo<Address> addressRepo,
             IBaseRepo<Cart> cartRepo,
             IBaseRepo<CartItem> cartItemRepo,
-            IBaseRepo<Category> categoryRepo,
+            ICategoryRepo categoryRepo,
             IBaseRepo<Customer> customerRepo,
             IBaseRepo<Message> messageRepo,
             IBaseRepo<Notification> notificationRepo,
@@ -67,7 +67,7 @@
         public IBaseRepo<Address> AddressRepo => _addressRepo;
         public IBaseRepo<Cart> CartRepo => _cartRepo;
         public IBaseRepo<CartItem> CartItemRepo => _cartItemRepo;
-        public IBaseRepo<Category> CategoryRepo => _categoryRepo;
+        public ICategoryRepo CategoryRepo => _categoryRepo;
         public IBaseRepo<Customer> CustomerRepo => _customerRepo;
         public IBaseRepo<Message> MessageRepo => _messageRepo;
         public IBaseRepo<Notification> NotificationRepo => _notificationRepo;
