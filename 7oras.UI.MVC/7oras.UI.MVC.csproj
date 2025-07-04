@@ -8,19 +8,61 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\7oras.Application.Shared\7oras.Application.Shared.csproj" />
     <ProjectReference Include="..\7oras.Application\7oras.Application.csproj" />
     <ProjectReference Include="..\7oras.Infrastructure.EF\7oras.Infrastructure.EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\Request\Address\" />
+    <Folder Include="ViewModels\Request\CartItem\" />
+    <Folder Include="ViewModels\Request\Cart\" />
+    <Folder Include="ViewModels\Request\Customer\" />
+    <Folder Include="ViewModels\Request\Message\" />
+    <Folder Include="ViewModels\Request\Notification\" />
+    <Folder Include="ViewModels\Request\OrderItem\" />
+    <Folder Include="ViewModels\Request\OrderStatusHistory\" />
+    <Folder Include="ViewModels\Request\Order\" />
+    <Folder Include="ViewModels\Request\PaymentMethod\" />
+    <Folder Include="ViewModels\Request\Person\" />
+    <Folder Include="ViewModels\Request\Product\" />
+    <Folder Include="ViewModels\Request\Report\" />
+    <Folder Include="ViewModels\Request\Review\" />
+    <Folder Include="ViewModels\Request\SubCategory\" />
+    <Folder Include="ViewModels\Request\Supplier\" />
+    <Folder Include="ViewModels\Request\Wishlist\" />
+    <Folder Include="ViewModels\Response\Address\" />
+    <Folder Include="ViewModels\Response\CartItem\" />
+    <Folder Include="ViewModels\Response\Cart\" />
+    <Folder Include="ViewModels\Response\Customer\" />
+    <Folder Include="ViewModels\Response\Message\" />
+    <Folder Include="ViewModels\Response\Notification\" />
+    <Folder Include="ViewModels\Response\OrderItem\" />
+    <Folder Include="ViewModels\Response\OrderStatusHistory\" />
+    <Folder Include="ViewModels\Response\Order\" />
+    <Folder Include="ViewModels\Response\PaymentMethod\" />
+    <Folder Include="ViewModels\Response\Person\" />
+    <Folder Include="ViewModels\Response\Product\" />
+    <Folder Include="ViewModels\Response\Report\" />
+    <Folder Include="ViewModels\Response\Review\" />
+    <Folder Include="ViewModels\Response\SubCategory\" />
+    <Folder Include="ViewModels\Response\Supplier\" />
+    <Folder Include="ViewModels\Response\Wishlist\" />
   </ItemGroup>
 
 </Project>

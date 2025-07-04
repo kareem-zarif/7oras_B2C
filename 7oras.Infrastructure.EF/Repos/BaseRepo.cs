@@ -7,6 +7,12 @@
         #endregion
         protected readonly AppDbContext _dbContext; //represent connection instance
         protected readonly DbSet<TEntity> _dbset; //reprsent database table in memory
+        public BaseRepo(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+            _dbset = dbContext.Set<TEntity>();
+        }
+
 
         public virtual async Task<TEntity> GetAsync(Guid id)
         {
@@ -37,12 +43,12 @@
 
         //for notRepeated filters  : use Expression<func<>>
         #endregion
+
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
             if (predicate == null)
                 return await _dbset.AsNoTracking().ToListAsync();
-
-            return await _dbset.AsNoTracking().Where(predicate).ToListAsync();
+            else return await _dbset.Where(predicate).ToListAsync();
         }
 
 
@@ -95,7 +101,7 @@
             if (predicate == null)
                 return await IncludeNavProperties(_dbset).AsNoTracking().ToListAsync();
 
-            return await IncludeNavProperties(_dbset).AsNoTracking().Where(predicate).ToListAsync();
+            return await IncludeNavProperties(_dbset).Where(predicate).ToListAsync();
 
         }
 

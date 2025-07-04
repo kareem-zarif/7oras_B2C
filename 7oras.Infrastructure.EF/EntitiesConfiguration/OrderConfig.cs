@@ -9,12 +9,12 @@
             builder.HasQueryFilter(x => x.IsExist);
 
             builder.HasOne(x => x.Customer)
-                .WithMany()
+                .WithMany(x => x.Orders)
                 .HasForeignKey(x => x.CustomerId)
                 .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasOne(x => x.PaymentMethod)
-                .WithMany()
+                .WithMany(x => x.Orders)
                 .HasForeignKey(x => x.PaymentMethodId)
                 .OnDelete(DeleteBehavior.NoAction);
         }

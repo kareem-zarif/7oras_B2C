@@ -1,1 +1,15 @@
 -ASP.NET Core localization
+
+-UOW => Can use simpe way
+	public interface IUOW
+{
+    ICategoryRepo CategoryRepo { get; }
+    IProductRepo ProductRepo { get; }
+    Task<int> SaveChangesAsync();
+}
+public class UOW : IUOW
+{
+    public ICategoryRepo CategoryRepo { get; }
+    public IProductRepo ProductRepo { get; }
+    // ...
+}

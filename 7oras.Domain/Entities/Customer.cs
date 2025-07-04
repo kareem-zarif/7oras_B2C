@@ -2,8 +2,6 @@
 {
     public class Customer : Person
     {
-        [ForeignKey("Cart")]
-        public Guid CartId { get; set; }
         //nav
         public virtual Cart Cart { get; set; }
         public virtual Wishlist Wishlist { get; set; }

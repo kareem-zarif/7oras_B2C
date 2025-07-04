@@ -14,9 +14,7 @@
         //extra details 
         public int? WarrantyNMonths { get; set; }
         public ShippingTypes Shipping { get; set; } = ShippingTypes.None;
-        [ForeignKey("SubCategory")]
         public Guid SubCategoryId { get; set; }
-
         //nav
         public virtual SubCategory SubCategory { get; set; }
         public virtual ICollection<Supplier> Suppliers { get; set; } = new HashSet<Supplier>();

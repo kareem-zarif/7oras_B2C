@@ -3,7 +3,6 @@
     public class CartItem : BaseEnt
     {
         public int Quantity { get; set; }
-        [ForeignKey("Product")]
         public Guid ProductId { get; set; }
         [ForeignKey("Cart")]
         public Guid CartId { get; set; }

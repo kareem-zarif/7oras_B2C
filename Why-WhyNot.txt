@@ -25,4 +25,9 @@ Filteration often in database not in memory
 -Scalability: Databases are optimized for filtering, sorting, and paging large datasets than memory
 -Security : avoid fetching sensitive data
 
+Dtos
+-Not have Nav Properties 
+-Has Server Side Validation
+-Response Dto , Not has Any  Validation or DataNotations
+
 //hossam

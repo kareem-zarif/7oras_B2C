@@ -1,5 +1,3 @@
-using _7oras.Application.IOC;
-using _7oras.Infrastructure.EF.IOC;
 namespace _7oras.UI.MVC
 {
     public class Program
@@ -11,6 +9,7 @@ namespace _7oras.UI.MVC
             // Add services to the container.
             //>>layers configs
             //>>layers configs
+            builder.Services.ConfigMVC();
             builder.Services.ConfigAppAutoMapper();
             builder.Services.ConfigAppServices();
             builder.Services.ConfigEF(builder.Configuration);

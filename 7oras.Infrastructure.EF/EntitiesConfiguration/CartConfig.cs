@@ -9,8 +9,7 @@
             builder.HasQueryFilter(x => x.IsExist);
 
             builder.HasOne(x => x.Customer)
-                .WithMany()
-                .HasForeignKey(x => x.CustomerId)
+                .WithOne(x => x.Cart)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

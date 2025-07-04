@@ -11,12 +11,10 @@
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Messages)
-                .HasForeignKey(x => x.CustomerId)
                 .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasOne(x => x.Supplier)
                 .WithMany(x => x.Messages)
-                .HasForeignKey(x => x.SupplierId)
                 .OnDelete(DeleteBehavior.Restrict);
             //Cascade:: Customer delete cause all related messages
             //Restrict :: can not delete Customer till delete message(depency) 

@@ -4,12 +4,12 @@
     {
         public MappingAppProfile()
         {
-            //CreateMap<source,Destination>();
+            //CreateMap<source,Destination>().reversMap();
 
             #region Category
-            CreateMap<CategoryAppCreateDto, Category>();
-            CreateMap<CategoryAppUpdateDto, Category>();
-            CreateMap<CategoryAppResDto, Category>();
+            CreateMap<CategoryAppCreateDto, Category>().ReverseMap();
+            CreateMap<CategoryAppUpdateDto, Category>().ReverseMap();
+            CreateMap<CategoryAppResDto, Category>().ReverseMap();
             #endregion
         }
     }

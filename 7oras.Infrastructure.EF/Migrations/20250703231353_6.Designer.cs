@@ -12,8 +12,8 @@ using _7oras.Infrastructure.EF.Data;
 namespace _7oras.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250702215949_Entities-Creation")]
-    partial class EntitiesCreation
+    [Migration("20250703231353_6")]
+    partial class _6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,19 +85,19 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("PersonId")
@@ -129,10 +129,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("CustomerId")
@@ -141,15 +141,16 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
 
                     b.ToTable("Carts");
                 });
@@ -163,25 +164,22 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<Guid>("CartId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
@@ -193,8 +191,6 @@ namespace _7oras.Infrastructure.EF.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ProductId1");
-
                     b.ToTable("CartItems");
                 });
 
@@ -204,24 +200,23 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -245,10 +240,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CustomerId")
@@ -257,10 +252,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("SupplierId")
@@ -281,10 +276,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsExist")
@@ -298,10 +293,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -315,31 +310,25 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CustomerId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("PaymentMethodId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("PaymentMethodId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("TotalAmount")
@@ -349,11 +338,7 @@ namespace _7oras.Infrastructure.EF.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("CustomerId1");
-
                     b.HasIndex("PaymentMethodId");
-
-                    b.HasIndex("PaymentMethodId1");
 
                     b.ToTable("Orders");
                 });
@@ -364,10 +349,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsExist")
@@ -376,19 +361,16 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<bool>("IsSample")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
@@ -403,8 +385,6 @@ namespace _7oras.Infrastructure.EF.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ProductId1");
-
                     b.ToTable("OrderItems");
                 });
 
@@ -417,19 +397,19 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<DateTime>("ChangedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("OrderId")
@@ -462,10 +442,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("CustomerId")
@@ -485,10 +465,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<byte>("PaymentType")
@@ -512,10 +492,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Discriminator")
@@ -526,10 +506,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Phone")
@@ -560,10 +540,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<byte>("ApprovalStatus")
                         .HasColumnType("tinyint");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -577,10 +557,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<int>("MinNumToFactoryOrder")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -611,17 +591,12 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<Guid>("SubCategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("SubCategoryId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("WarrantyNMonths")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SubCategoryId");
-
-                    b.HasIndex("SubCategoryId1");
 
                     b.ToTable("Products");
                 });
@@ -632,25 +607,22 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CustomerId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Reason")
@@ -663,8 +635,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("CustomerId1");
 
                     b.HasIndex("SupplierId");
 
@@ -681,10 +651,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("CustomerId")
@@ -693,10 +663,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("PrdoductId")
@@ -726,10 +696,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -739,10 +709,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -763,10 +733,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("CustomerId")
@@ -775,10 +745,10 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Property<bool>("IsExist")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -792,11 +762,6 @@ namespace _7oras.Infrastructure.EF.Migrations
             modelBuilder.Entity("_7oras.Domain.Customer", b =>
                 {
                     b.HasBaseType("_7oras.Domain.Person");
-
-                    b.Property<Guid>("CartId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasIndex("CartId");
 
                     b.HasDiscriminator().HasValue("Customer");
                 });
@@ -894,8 +859,8 @@ namespace _7oras.Infrastructure.EF.Migrations
             modelBuilder.Entity("_7oras.Domain.Cart", b =>
                 {
                     b.HasOne("_7oras.Domain.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
+                        .WithOne("Cart")
+                        .HasForeignKey("_7oras.Domain.Cart", "CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -911,14 +876,8 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .IsRequired();
 
                     b.HasOne("_7oras.Domain.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("_7oras.Domain.Product", null)
                         .WithMany("CartItems")
-                        .HasForeignKey("ProductId1")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -947,22 +906,14 @@ namespace _7oras.Infrastructure.EF.Migrations
             modelBuilder.Entity("_7oras.Domain.Order", b =>
                 {
                     b.HasOne("_7oras.Domain.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("_7oras.Domain.Customer", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId1");
-
                     b.HasOne("_7oras.Domain.PaymentMethod", "PaymentMethod")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("PaymentMethodId")
                         .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("_7oras.Domain.PaymentMethod", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("PaymentMethodId1");
 
                     b.Navigation("Customer");
 
@@ -976,14 +927,8 @@ namespace _7oras.Infrastructure.EF.Migrations
                         .HasForeignKey("OrderId");
 
                     b.HasOne("_7oras.Domain.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("_7oras.Domain.Product", null)
                         .WithMany("OrderItems")
-                        .HasForeignKey("ProductId1")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1017,14 +962,10 @@ namespace _7oras.Infrastructure.EF.Migrations
             modelBuilder.Entity("_7oras.Domain.Product", b =>
                 {
                     b.HasOne("_7oras.Domain.SubCategory", "SubCategory")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("_7oras.Domain.SubCategory", null)
-                        .WithMany("Products")
-                        .HasForeignKey("SubCategoryId1");
 
                     b.Navigation("SubCategory");
                 });
@@ -1032,16 +973,12 @@ namespace _7oras.Infrastructure.EF.Migrations
             modelBuilder.Entity("_7oras.Domain.Report", b =>
                 {
                     b.HasOne("_7oras.Domain.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Reports")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("_7oras.Domain.Customer", null)
-                        .WithMany("Reports")
-                        .HasForeignKey("CustomerId1");
-
                     b.HasOne("_7oras.Domain.Supplier", "Supplier")
-                        .WithMany()
+                        .WithMany("Reports")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Restrict);
 
@@ -1091,17 +1028,6 @@ namespace _7oras.Infrastructure.EF.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("_7oras.Domain.Customer", b =>
-                {
-                    b.HasOne("_7oras.Domain.Cart", "Cart")
-                        .WithMany()
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-                });
-
             modelBuilder.Entity("_7oras.Domain.Cart", b =>
                 {
                     b.Navigation("CartItems");
@@ -1145,6 +1071,9 @@ namespace _7oras.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("_7oras.Domain.Customer", b =>
                 {
+                    b.Navigation("Cart")
+                        .IsRequired();
+
                     b.Navigation("Messages");
 
                     b.Navigation("Orders");
@@ -1162,6 +1091,8 @@ namespace _7oras.Infrastructure.EF.Migrations
             modelBuilder.Entity("_7oras.Domain.Supplier", b =>
                 {
                     b.Navigation("Messages");
+
+                    b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618
         }

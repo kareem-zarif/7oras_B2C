@@ -12,8 +12,8 @@
             });
 
             services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));//resolve and inject all repo automatically when create dbcontext
-            services.AddScoped<IUOW, UOW>();
 
+            services.AddScoped<IUOW, UOW>();
             return services;
         }
     }

@@ -12,16 +12,18 @@
             builder.HasQueryFilter(x => x.IsExist); //default show only Exsiting(hide soft Deleted)
 
             builder.HasMany(x => x.CartItems)
-                .WithOne()
+                .WithOne(x => x.Product)
+                .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.SubCategory)
-                 .WithMany()
+                 .WithMany(x => x.Products)
                  .HasForeignKey(x => x.SubCategoryId)
                  .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x => x.OrderItems)
-                .WithOne()
+                .WithOne(x => x.Product)
+                .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
